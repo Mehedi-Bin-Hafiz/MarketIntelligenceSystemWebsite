@@ -13,17 +13,15 @@ import joblib
 
 
 #database
-MainDatabase = pd.read_excel(r'ManipulatedData.xlsx')
+MainDatabase = pd.read_excel(r'RiceData.xlsx')
 # base on database we will set iloc
 nx = MainDatabase.iloc[:, 1:5].values  #independent variables
 ny = MainDatabase.iloc[ : , -2].values #dependent variables
-# print(nx)
-# print(ny)
 
 
 nX_train,nX_test,ny_train,ny_test=train_test_split(nx,ny,test_size=0.3, random_state=3)
-clf = DecisionTreeClassifier()
+clf = RandomForestClassifier(n_estimators=100)
 clf.fit(nX_train,ny_train)
 
-model_name = 'MLModel.sav'
+model_name = 'RiceMLModel.sav'
 joblib.dump(clf,model_name)

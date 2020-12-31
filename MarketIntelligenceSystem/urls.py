@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pricePredictor.views import predictor_view,result_view,home_view
+from pricePredictor.views import onion_predictor_view,onion_result_view,home_view,rice_predictor_view,rice_result_view
 from reviewAnalyst.views import review_input, review_result
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_view,name= 'home'),
-    path('predictor/',predictor_view,name='predictor'),
-    path('result/',result_view, name = 'onionresult'),
+    path('onionpredictor/',onion_predictor_view,name='onionPredictor'),
+    path('onionresult/',onion_result_view, name = 'onionResult'),
     path('reviewInput/',review_input, name = 'reviewInput'),
     path('reviewresult/',review_result, name = 'reviewResult'),
+    path('ricepredictor/', rice_predictor_view, name='ricePredictor'),
+    path('riceresult/', rice_result_view, name='riceResult'),
 
 ]

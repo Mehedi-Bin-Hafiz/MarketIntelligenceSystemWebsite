@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Patua+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Amaranth&family=Hanalei+Fill&family=Patua+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/onionPriceInput.css'%}">
+    <link rel="stylesheet" href="{% static 'css/priceInput.css'%}">
 </head>
 
 <body>
@@ -59,7 +59,15 @@
 
   <div class="my-form">
     <h4 style="text-align: center; font-family: 'Patua One', cursive;">Please, Fill up the form</h4>
-    <form action="{% url 'onionresult' %}">
+      <h5 style="text-align: center"> {{ ProSelect }} Price Prediction</h5>
+      {% if ProSelect == "Onion" %}
+          {% url 'onionResult' as the_url %}
+      {% endif %}
+      {% if ProSelect  == "Rice" %}
+          {% url 'riceResult' as the_url %}
+      {% endif %}
+
+    <form action={{ the_url }}>
       <!-- Year -->
         {% csrf_token %}
       <div class="form-outline mb-4">

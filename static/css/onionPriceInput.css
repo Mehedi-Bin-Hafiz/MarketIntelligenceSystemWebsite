@@ -1,0 +1,35 @@
+.my-form{
+    
+    margin: 0 auto;
+    margin-top: 5%;
+    max-width: 300px;
+
+}
+.golgol button{
+    border-radius: 35% !important;
+}
+.uppernav{
+    height: 10px;
+    background-color: #007BFF;
+}
+
+.my-container{
+    max-width: 10%;
+}
+
+.mynavbar li a{
+    text-decoration: none;
+    color: #ffffff;
+    padding:.4rem; /*16 pixel*/
+    font-size: 1.3rem;
+    margin-left: 1.5rem;
+    border-radius: 5px;
+    transition: background-color .8s;
+}
+.mynavbottom{
+    border-bottom: 2px solid #3693ff;
+}
+.mynavbar li a:hover{
+    background-color: #3693ff;
+    color: white !important;
+}

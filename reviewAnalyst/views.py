@@ -1,7 +1,8 @@
 from django.shortcuts import render,HttpResponse
-import joblib
 from nltk.stem.porter import PorterStemmer
-import datetime
+
+
+
 porter = PorterStemmer()
 def tokenizer_porter(text):
      return [porter.stem(word) for word in text.split()]
@@ -14,44 +15,34 @@ def PunctuationRemover(my_str):
             no_punct = no_punct + char
     return no_punct
 
-
 def review_input(request):
     return render(request,'reviewInput.html')
 def review_result(request):
-    # myinput = request.GET['Review']
-    # print(myinput)
-    # myinputclean = PunctuationRemover(myinput)
-    #
-    # check2 = [w for w in tokenizer_porter(myinputclean)]
-    # withoutstopword = ' '.join(check2)
-    #
-    # # print(ManipulatedPosts)
-    # from sklearn.feature_extraction.text import TfidfVectorizer
-    # tfidf = TfidfVectorizer(strip_accents=None,
-    #                         lowercase=False,
-    #                         preprocessor=None,
-    #                         tokenizer=tokenizer_porter,
-    #                         use_idf=True,
-    #                         norm='l2',
-    #                         smooth_idf=True)
-    #
-    # predictable = tfidf.fit_transform(withoutstopword)  # we can not use fit_transform here
-    # # print(predictable)
-    #
-    # clf = joblib.load('ProductModel.sav')
-    # result = clf.predict(predictable)
-    # pred = result[0]
-    # print('\nPrediction: ')
-    # if pred == 0:
-    #     conv='It is positive Review'
-    # elif pred == 1:
-    #    conv='It is Negative Review'
-    # else:
-    #     pass
-    #
-    # context = {
-    #     'result': conv
-    # }
-    now = datetime.datetime.now()
-    html = "<html><body><h1 style='color:red;text-align:center; margin-top:30px; border: 5px solid black; padding: 10px; '>It is now %s. <br> Page is under developing</h1></body></html>" % now
-    return HttpResponse(html)
+    import joblib
+    myinput = request.GET['Review']
+    myinputclean = PunctuationRemover(myinput)
+    check2 = [w for w in tokenizer_porter(myinputclean)]
+    withoutstopword = ' '.join(check2)
+    predictionlist = []
+    tfidf = joblib.load('tfidf.sav')
+    predictable = tfidf.transform([withoutstopword])
+    Logistic = joblib.load('ProductModel.sav')
+    pred = Logistic.predict(predictable)
+    predictionlist.append(pred[0])
+    totallen = len(predictionlist)
+    zero = predictionlist.count(0)
+    one = predictionlist.count(1)
+    posReview = "Positive review {:.2f}%".format((zero * 100) / totallen, )
+    negReview = "Negative review {:.2f}%".format((one * 100) / totallen, )
+
+    context = {
+
+        "posReview": posReview,
+        "negReview": negReview
+
+    }
+
+    return render(request, 'priceResult.html',context)
+
+
+

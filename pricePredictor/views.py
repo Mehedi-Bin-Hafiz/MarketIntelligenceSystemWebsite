@@ -76,12 +76,21 @@ def onion_result_view(request):
         season = 4
         lis.append(season)
 
-    clf = joblib.load('OnionMLModel.sav')
+    clf = joblib.load('OnionRegressionModel.sav')
     result = clf.predict([lis])
     result = result[0]
+    if result<40 and result>0:
+        decision = 'Low'
+
+    elif result<60 and result>=40:
+        decision = 'Medium'
+
+    else:
+        decision = 'High'
     context = {
+        'decision': decision,
         'product': 'Onion',
-        'result': result
+        'result': 'Price may be: {:.2f} taka'.format(result)
     }
     return  render(request, 'priceResult.html', context)
 
@@ -156,12 +165,21 @@ def rice_result_view(request):
         season = 4
         lis.append(season)
 
-    clf = joblib.load('RiceMLModel.sav')
+    clf = joblib.load('riceRegressionModel.sav')
     result = clf.predict([lis])
     result = result[0]
+    decision = 'None'
+    if result < 95 and result > 0:
+        decision = 'Low'
+    elif result < 140 and result >= 95:
+        decision = 'Medium'
+
+    elif result >= 140:
+        decision = 'High'
     context = {
+        'decision': decision,
         'product': 'Rice',
-        'result': result
+        'result': 'Price may be: {:.2f} taka'.format(result)
     }
     return  render(request, 'priceResult.html', context)
 

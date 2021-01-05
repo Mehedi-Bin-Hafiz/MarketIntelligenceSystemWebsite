@@ -10,7 +10,7 @@ from sklearn import svm
 from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 import joblib
-
+from sklearn.ensemble import GradientBoostingRegressor
 
 #database
 MainDatabase = pd.read_excel(r'RiceData.xlsx')
@@ -20,8 +20,7 @@ ny = MainDatabase.iloc[ : , -2].values #dependent variables
 
 
 nX_train,nX_test,ny_train,ny_test=train_test_split(nx,ny,test_size=0.3, random_state=3)
-clf = RandomForestClassifier(n_estimators=100)
+clf= GradientBoostingRegressor(n_estimators=200)
 clf.fit(nX_train,ny_train)
-
-model_name = 'RiceMLModel.sav'
+model_name = 'riceRegressionModel.sav'
 joblib.dump(clf,model_name)

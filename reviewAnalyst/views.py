@@ -26,7 +26,7 @@ def review_result(request):
     predictionlist = []
     tfidf = joblib.load('tfidf.sav')
     predictable = tfidf.transform([withoutstopword])
-    Logistic = joblib.load('ProductModel.sav')
+    Logistic = joblib.load('productClassificationModel.sav')
     pred = Logistic.predict(predictable)
     predictionlist.append(pred[0])
     totallen = len(predictionlist)
@@ -42,7 +42,7 @@ def review_result(request):
 
     }
 
-    return render(request, 'priceResult.html',context)
+    return render(request, 'reviewResult.html',context)
 
 
 

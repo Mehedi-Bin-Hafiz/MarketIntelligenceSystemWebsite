@@ -46,13 +46,10 @@ body {
 }
 
 .secondary-result-body{
-    margin-top: 10%;
     padding-top: 5px;
     padding-bottom:5px;;
     width: 100%;
     color:white;
-    font-family: 'Amaranth', sans-serif;
-    font-family: 'Courgette', cursive;
     font-family: 'Secular One', sans-serif;  
     background-image: linear-gradient(45deg, #09203f 0%, #537895 100%);
 }

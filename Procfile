@@ -1,0 +1,1 @@
+web: gunicorn MarketIntelligenceSystem.wsgi --log-file - 

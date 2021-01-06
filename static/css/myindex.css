@@ -112,7 +112,7 @@ span{
   }
 }
 
-@media only screen and (max-width: 336px) {
+@media only screen and (max-width: 332px) {
   .home-screen-body h1{
         font-size: 28px;
   }

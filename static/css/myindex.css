@@ -112,8 +112,16 @@ span{
   }
 }
 
-@media only screen and (max-width: 332px) {
+@media only screen and (max-width: 336px) {
   .home-screen-body h1{
         font-size: 25px;
+  }
+}
+@media only screen and (max-width: 220px) {
+  .home-screen-body h1{
+        font-size: 20px;
+  }
+    .home-screen-body p{
+        font-size: 10px;
   }
 }

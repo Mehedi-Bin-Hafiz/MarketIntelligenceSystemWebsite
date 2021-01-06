@@ -57,7 +57,14 @@
       <div class="secondary-result-body text-center">
             <h5><span><br>{{result}}</span></h5>
       </div>
+      <p id="price" style="display: none">{{ monthlyPrice }}</p>
+      <p id="labels" style="display: none">{{ labels }}</p>
   </section>
+  <br>
+  <h4 style="text-align: center">Price of full Month</h4>
+ <div class="chart-container" style="position: relative; height:35vh; width:70vw; margin: auto;">
+      <canvas id="myChart"></canvas>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -68,5 +75,104 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+const labels = document.getElementById('labels');
+const newLabel = labels.innerText;
+const price = document.getElementById('price');
+const newPrice =price.innerText;
+let p = newPrice.replace('[','');
+ p = p.replace(']','');
+ p = p.trim();
+ p =p.split(", ");
+let newp= p.map(p=>(
+    parseFloat(p)
+));
+
+let l = newLabel.replace('[','');
+ l = l.replace(']','');
+ l = l.trim();
+ l =l.split(", ");
+let newl= l.map(l=>(
+    parseInt(l)
+));
+
+
+
+
+
+{#console.log(labels,Array.from(labels.innerText));#}
+{#console.log(price);#}
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: newl,
+        datasets: [{
+            label: 'Price is ',
+            data: newp,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(10, 91, 205, 0.5)',
+                'rgba(10, 205, 120, 0.5)',
+                'rgba(205, 10, 10, 0.5)',
+                'rgba(185, 205, 10, 0.5)',
+                'rgba(205, 10, 10, 0.5)',
+                'rgba(67, 0, 112, 0.5)',
+                'rgba(51, 80, 193, 0.5)',
+                'rgba(51, 193, 172, 0.5)',
+                'rgba(61, 193, 51, 0.5)',
+                'rgba(193, 51, 51, 0.5)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(10, 91, 205, 0.5)',
+                'rgba(10, 205, 120, 0.5)',
+                'rgba(205, 10, 10, 0.5)',
+                'rgba(185, 205, 10, 0.5)',
+                'rgba(205, 10, 10, 0.5)',
+                'rgba(67, 0, 112, 0.5)',
+                'rgba(51, 80, 193, 0.5)',
+                'rgba(51, 193, 172, 0.5)',
+                'rgba(61, 193, 51, 0.5)',
+                'rgba(193, 51, 51, 0.5)',
+
+
+
+
+
+
+
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 </body>
 </html>

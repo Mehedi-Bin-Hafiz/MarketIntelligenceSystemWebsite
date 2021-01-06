@@ -65,3 +65,13 @@ section h4{
 
 /*comment*/
 
+@media only screen and (max-width: 876px) {
+  .result-body {
+      width: 70%;
+  }
+}
+@media only screen and (max-width: 700px) {
+ .chart-container {
+      width: 100% !important;
+  }
+}

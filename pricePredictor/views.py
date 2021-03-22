@@ -77,11 +77,9 @@ def monthlyPredictor(year, month,clf):
         elif month == 12 and (i >= 15 and i <= 31):
             season = 4
             lis.append(season)
-        result = clf.predict([[year,month,i,season]])
+        result = clf.predict([[year,i,month,season]])
         result = result[0]
         predicted_resut.append(round(result,2))
-
-
     return predicted_resut
 
 def home_view(request):
@@ -102,8 +100,6 @@ def onion_result_view(request):
     labels=list()
     for label in range(1,len(montlyPrice)+1):
         labels.append(label)
-    print('label:',labels)
-    print('data:',montlyPrice)
     if result<40 and result>0:
         decision = 'Low'
     elif result<60 and result>=40:

@@ -18,7 +18,6 @@ MainDatabase = pd.read_excel(r'RiceData.xlsx')
 nx = MainDatabase.iloc[:, 1:5].values  #independent variables
 ny = MainDatabase.iloc[ : , -2].values #dependent variables
 
-
 nX_train,nX_test,ny_train,ny_test=train_test_split(nx,ny,test_size=0.3, random_state=3)
 clf= GradientBoostingRegressor(n_estimators=200)
 clf.fit(nX_train,ny_train)
